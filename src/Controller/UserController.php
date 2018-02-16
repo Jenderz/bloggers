@@ -58,10 +58,6 @@ class UserController extends AbstractController
             $user = $form->getData();
 
             try {
-                if (!$captchaValidator->validateCaptcha($request->get('g-recaptcha-response'))) {
-                    $form->addError(new FormError($translator->trans('captcha.wrong')));
-                    throw new ValidatorException('captcha.wrong');
-                }
 
                 $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
                 $token = $tokenGenerator->generateToken();
